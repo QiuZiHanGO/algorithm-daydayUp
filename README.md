@@ -396,3 +396,64 @@ var myAtoi = function(str) {
 
 ### 方法二：自动机
 
+
+
+# 2021-10-23
+
+## leecode no14.最长公共前缀（easy）
+
+### 题目概述：模拟
+
+> 编写一个函数来查找字符串数组中的最长公共前缀。
+>
+> 如果不存在公共前缀，返回空字符串 `""`。
+>
+> **示例 1：**
+>
+> ```
+> 输入：strs = ["flower","flow","flight"]
+> 输出："fl"
+> ```
+>
+> **示例 2：**
+>
+> ```
+> 输入：strs = ["dog","racecar","car"]
+> 输出：""
+> 解释：输入不存在公共前缀。
+> ```
+
+### 方法一：模拟
+
+```js
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function(strs) {
+    if(!strs.length){
+        return "";
+    }
+    let i = 0;
+    let first = strs[0];
+    for(; i<first.length; i++){
+        let char = first.charAt(i);
+        let flag = true;
+        let j = 0;
+        while(j < strs.length){
+            if(strs[j][i] !== char){
+                flag = false;
+                break;
+            }
+            j++;
+        }
+        if(!flag){
+            break;
+        }
+    }
+    return first.substring(0,i)
+};
+```
+
+
+
