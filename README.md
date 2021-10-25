@@ -460,7 +460,7 @@ var longestCommonPrefix = function(strs) {
 
 ## leetcode no13.罗马数字转整数（easy）
 
-### 题目描述：
+### 题目概述：
 
 > 罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。
 >
@@ -584,6 +584,53 @@ var romanToInt = function(s) {
     return result;
 };
 ```
+
+# 2021-10-25
+
+## leetcode no13.盛最多水的容器
+
+### 题目概述：双指针
+
+> 给你 n 个非负整数 a1，a2，...，an，每个数代表坐标中的一个点 (i, ai) 。在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0) 。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。
+>
+> 说明：你不能倾斜容器。
+>
+> 示例 1：
+>
+> ![img](https://aliyun-lc-upload.oss-cn-hangzhou.aliyuncs.com/aliyun-lc-upload/uploads/2018/07/25/question_11.jpg)
+>
+> 输入：[1,8,6,2,5,4,8,3,7]
+> 输出：49 
+> 解释：图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。
+>
+> 示例 2：
+>
+> 输入：height = [4,3,2,1,4]
+> 输出：16
+
+### 方法一：双指针法
+
+```js
+// 移动数字较小的那个指针
+// 一开始left和right指针在最两侧，此时宽度最大，高低是较低的那条，然后考虑指针移动，我的宽度是要不断缩小的。那么我应该是去移动我较小高度的那条边，才会有机率增加我的面积，否则移动最高那条永远都是只会越小的，虽然移动较小那条边也有可能会变小。但是起码会有变大的概率。所以指针移动的方向应该是缩小较小高度。
+function findMaxContent(heights) {
+    let max = 0;
+    let left = 0, right = heights.length - 1;
+    while(left < right) {
+        max = Math.max(max, Math.min(heights[left], heights[right]) * (right - left));
+        if(heights[right] > heights[left]) {
+            left ++;
+        } else {
+            right --;
+        }
+    }
+    return max;
+}
+```
+
+
+
+
 
 
 
