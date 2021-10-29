@@ -730,3 +730,36 @@ var mirrorTree = function(root) {
 };
 ```
 
+# 2021-10-29
+
+## leetcode no53.最大子序和（easy）
+
+### 题目概述：动态规划
+
+> 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+>
+> 示例 1：
+>
+> 输入：nums = [-2,1,-3,4,-1,2,1,-5,4]
+> 输出：6
+> 解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。
+
+### 方法一：动态规划
+
+```js
+// 动态规划
+// 用dp[i]存储算上nums[i]的i之前的最大的子序和
+// 循环遍历数组，每次可选择是否加前面的最大子序和dp[i-1]
+// 若dp[i-1] <= 0 则不加
+var maxSubArray = function(nums) {
+    let dp = new Array(nums.length);
+    dp[0] = nums[0];
+    let maxSubSum = nums[0];
+    for(let i = 1;i < nums.length; i++){
+        dp[i] = (dp[i-1] <= 0) ? nums[i] : dp[i-1] + nums[i];
+        maxSubSum = Math.max(dp[i], maxSubSum)
+    }
+    return maxSubSum;
+};
+```
+
